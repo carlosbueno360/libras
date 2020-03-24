@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppTECLIBRAS.Views.PageSobre"
+             Title="Sobre"  BackgroundColor="{StaticResource WhiteColor}">
+    <ContentPage.Content>
+        
+
+        <StackLayout Orientation="Horizontal" Margin="10">
+            <StackLayout Orientation="Horizontal" Margin="10">
+                <Label Text="Dados do aplicativo
+                                
+                       Nome do App: TecLibras
+                             Descrição do Projeto: Projeto desenvolvido como Trabalho de Conclusão de Curso.
+                             Autor: Grupo TecLibras 2020"
+                       FontAttributes="Bold"
+                       FontSize="Medium"
+                       VerticalOptions="CenterAndExpand"
+                       TextColor="Black"/>
+            </StackLayout>
+          
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

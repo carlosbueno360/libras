@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppTECLIBRAS.App">
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <Color x:Key="MainColor">#1B2B32</Color>
+            <Color x:Key="FontColor">#1B2B32</Color>
+            <Color x:Key="MenuColor">#A3ABAF</Color>
+            <Color x:Key="MenuFontColor">#E1E7E8</Color>
+            <Color x:Key="BackgroundColor">#E1E7E8</Color>
+            <Color x:Key="AcentColor">#ff7b00</Color>
+
+            <!--DICIONARIO DE COR DO MENU-->
+            <Color x:Key="WhiteColor">#FFF</Color>
+            <Color x:Key="MainColor2">#828282</Color>
+            <Color x:Key="FontColor2">#61CFFF</Color>
+            <Color x:Key="AcentColor2">#57BAE5</Color>
+            <Color x:Key="BackgroundColor2">#18333F</Color>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

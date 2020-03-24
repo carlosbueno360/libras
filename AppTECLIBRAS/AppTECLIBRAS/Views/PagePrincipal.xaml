@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppTECLIBRAS.Views.PagePrincipal">
+    <MasterDetailPage.Master>
+        <ContentPage Title="Menu"
+                      BackgroundColor="{StaticResource MainColor2}">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="10" Spacing="20">
+                    <Image Source="logo.jpg"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Padding="10" Spacing="20">
+                    <Image Source="ic_action_pan_home.png"/>
+                    <Button x:Name="btHome" Text="Home" Clicked="BtHome_Clicked"
+                            HorizontalOptions="FillAndExpand"
+                            BackgroundColor="{StaticResource AcentColor}"
+                            TextColor="White"
+                            BorderColor="Red"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Padding="10" Spacing="20">
+                    <Image Source="ic_action_pan_calibrar.png"/>
+                    <Button x:Name="btCalibrar" Text="Calibrar Luva" Clicked="BtCalibrar_Clicked" 
+                            HorizontalOptions="FillAndExpand"
+                             BackgroundColor="{StaticResource AcentColor}"
+                            TextColor="White"
+                            BorderColor="Red"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Padding="10" Spacing="20">
+                    <Image Source="ic_action_pan_alfabetizar.png"/>
+                    <Button x:Name="btAlfabetizar" Text="Alfabetizar" Clicked="BtAlfabetizar_Clicked"
+                            HorizontalOptions="FillAndExpand"
+                             BackgroundColor="{StaticResource AcentColor}"
+                            TextColor="White"
+                            BorderColor="Red"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Padding="10" Spacing="20">
+                    <Image Source="ic_action_pan_exercicio.png"/>
+                    <Button x:Name="btExercicio" Text="Exercícios" Clicked="BtExercicio_Clicked"
+                            HorizontalOptions="FillAndExpand"
+                             BackgroundColor="{StaticResource AcentColor}"
+                            TextColor="White"
+                            BorderColor="Red"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Padding="10" Spacing="20">
+                    <Image Source="ic_action_pan_sobre.png"/>
+                    <Button x:Name="btSobre"  Text="Sobre" Clicked="BtSobre_Clicked"
+                            HorizontalOptions="FillAndExpand"
+                             BackgroundColor="{StaticResource AcentColor}"
+                            TextColor="White"
+                            BorderColor="Red"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Padding="10" Spacing="20">
+                    <Image Source="ic_action_pan_sair.png"/>
+                    <Button x:Name="btSair"  Text="Sair" Clicked="BtSair_Clicked"
+                            HorizontalOptions="FillAndExpand"
+                             BackgroundColor="{StaticResource AcentColor}"
+                            TextColor="White"
+                            BorderColor="Red"
+                           />
+                </StackLayout>
+            </StackLayout>
+        </ContentPage>
+    </MasterDetailPage.Master>
+    <MasterDetailPage.Detail>
+        <ContentPage Title="Pagina Principal">
+            <Label Text=""/>
+        </ContentPage >
+    </MasterDetailPage.Detail>
+    
+</MasterDetailPage>
+
+ 

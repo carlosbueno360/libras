@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppTECLIBRAS.Views.LoginPage"
+           Title="Login"  BackgroundColor="{StaticResource WhiteColor}">
+
+
+    <StackLayout Padding="10" Spacing="20">
+        <StackLayout Orientation="Horizontal">
+
+            <Label
+               Text="TecLibras"    
+               TextColor="{StaticResource AcentColor}"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="StartAndExpand"
+               VerticalOptions="Center">
+            </Label>
+        </StackLayout>
+
+        <BoxView
+            HeightRequest="3"
+            Color="{StaticResource AcentColor}">
+
+        </BoxView>
+
+        <Entry x:Name="emailEntry"
+            Placeholder="E-mail"
+            TextColor="{StaticResource AcentColor}"
+            PlaceholderColor="Black"
+            Keyboard="Email">
+        </Entry>
+
+        <Entry x:Name="senhaEntry"
+            Placeholder="Senha"
+            TextColor="{StaticResource AcentColor}"
+            PlaceholderColor="Black"
+            IsPassword="True">
+        </Entry>
+
+        <Button x:Name="loginButton"
+             Text="Login"
+             TextColor="{StaticResource WhiteColor}"
+             HorizontalOptions="FillAndExpand"
+             VerticalOptions="Center"
+            BackgroundColor="{StaticResource AcentColor}"
+              Clicked="LoginButton_Clicked">
+        </Button>
+
+        <StackLayout Orientation="Horizontal" Padding="20">
+            <StackLayout Orientation="Horizontal">
+
+                <Label
+               Text="Esqueci a Senha"    
+               TextColor="{StaticResource WhiteColor}"
+               FontSize="15"
+               HorizontalOptions="StartAndExpand"
+               VerticalOptions="Center">
+                </Label>
+            </StackLayout>
+
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                <Button
+                    x:Name="Cad"
+               Text="Criar Conta"    
+               TextColor="Black"
+               FontSize="15"
+               HorizontalOptions="End"
+               VerticalOptions="Center"
+                  Clicked="Cad_Clicked"
+                      BackgroundColor="{StaticResource WhiteColor}">
+                </Button>
+            </StackLayout>
+
+        </StackLayout>
+
+        <!--<StackLayout Padding="10" Spacing="20">
+            <Button
+             Text="Login com Facebook"
+            Image="ic_action_pan_sair.png"
+             TextColor="{StaticResource WhiteColor}"
+             HorizontalOptions="FillAndExpand"
+             VerticalOptions="Center"
+            BackgroundColor="Blue">
+
+            </Button>
+        </StackLayout>-->
+
+    </StackLayout>
+</ContentPage>
+  
