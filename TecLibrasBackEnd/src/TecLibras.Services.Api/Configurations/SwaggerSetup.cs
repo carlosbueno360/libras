@@ -19,7 +19,6 @@ namespace TecLibras.Services.Api.Configurations
                     Version = "v1",
                     Title = "TecLibras Project",
                     Description = "TecLibras API Swagger surface",
-                    Contact = new OpenApiContact { Name = "", Email = "contato@eduardopires.net.br" },
                     License = new OpenApiLicense() { Name = "MIT" }
                 });
 
