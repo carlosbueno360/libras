@@ -1,5 +1,4 @@
 ﻿using System;
-using TecLibras.Infra.CrossCutting.IoC;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace TecLibras.UI.Web.Extensions
@@ -10,7 +9,7 @@ namespace TecLibras.UI.Web.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            NativeInjectorBootStrapper.RegisterServices(services);
+            //NativeInjectorBootStrapper.RegisterServices(services);
         }
     }
 }

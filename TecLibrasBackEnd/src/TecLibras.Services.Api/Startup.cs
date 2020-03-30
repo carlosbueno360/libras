@@ -87,5 +87,7 @@ namespace TecLibras.Services.API
 
             app.UseSwaggerSetup();
         }
+
+        
     }
 }

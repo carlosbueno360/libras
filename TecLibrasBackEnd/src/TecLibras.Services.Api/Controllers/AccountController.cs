@@ -3,15 +3,12 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using TecLibras.Domain.Core.Bus;
-using TecLibras.Domain.Core.Notifications;
-using TecLibras.Infra.CrossCutting.Identity.Models;
 using TecLibras.Services.Api.Configurations;
-using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using TecLibras.Services.Api.Models;
 
 namespace TecLibras.Services.Api.Controllers
 {
@@ -26,9 +23,7 @@ namespace TecLibras.Services.Api.Controllers
         public AccountController(
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
-            IOptions<AppSettings> appSettings,
-            INotificationHandler<DomainNotification> notifications,
-            IMediatorHandler mediator) : base(notifications, mediator)
+            IOptions<AppSettings> appSettings) : base()
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -58,7 +53,7 @@ namespace TecLibras.Services.Api.Controllers
             {
                 foreach (var error in result.Errors)
                 {
-                    NotifyError(error.Code, error.Description);
+                    
                 }
 
                 return Response(userRegistration);
@@ -88,7 +83,6 @@ namespace TecLibras.Services.Api.Controllers
                 return Response(token);
             }
 
-            NotifyError("Login", result.ToString());
             return Response(userLogin);
         }
 

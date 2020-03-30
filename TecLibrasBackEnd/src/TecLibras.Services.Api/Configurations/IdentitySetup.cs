@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Text;
-using TecLibras.Infra.CrossCutting.Identity.Authorization;
-using TecLibras.Infra.CrossCutting.Identity.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using TecLibras.Services.Api.Authorization;
+using TecLibras.Services.Api.Models;
 
 namespace TecLibras.Services.Api.Configurations
 {

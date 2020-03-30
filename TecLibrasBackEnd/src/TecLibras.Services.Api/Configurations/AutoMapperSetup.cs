@@ -1,7 +1,7 @@
 ﻿using System;
 using AutoMapper;
-using TecLibras.Application.AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
+using TecLibras.Services.Api.AutoMapper;
 
 namespace TecLibras.Services.Api.Configurations
 {
@@ -11,7 +11,7 @@ namespace TecLibras.Services.Api.Configurations
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.AddAutoMapper(typeof(DomainToViewModelMappingProfile), typeof(ViewModelToDomainMappingProfile));
+            services.AddAutoMapper(typeof(DomainToViewModelMappingProfile));
         }
     }
 }

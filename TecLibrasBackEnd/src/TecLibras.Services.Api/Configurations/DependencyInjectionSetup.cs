@@ -1,6 +1,11 @@
 ﻿using System;
-using TecLibras.Infra.CrossCutting.IoC;
+using Microsoft.AspNetCore.Authorization;
+using TecLibras.Services.Api.Context;
 using Microsoft.Extensions.DependencyInjection;
+using TecLibras.Services.Api.Authorization;
+using TecLibras.Services.Api.Models;
+using TecLibras.Services.Api.Repositories;
+using TecLibras.Services.Api.Model;
 
 namespace TecLibras.Services.Api.Configurations
 {
@@ -10,7 +15,22 @@ namespace TecLibras.Services.Api.Configurations
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            NativeInjectorBootStrapper.RegisterServices(services);
+            RegisterServices(services);
         }
+
+        
+        public static void RegisterServices(IServiceCollection services)
+        {
+            // ASP.NET Authorization Polices
+            services.AddSingleton<IAuthorizationHandler, ClaimsRequirementHandler>();
+
+            // Infra - Data
+            services.AddScoped<IPointsRepository, PointsRepository>();
+            services.AddScoped<TecLibrasContext>();
+
+            // Infra - Identity
+            services.AddScoped<IUser, AspNetUser>();
+        }
+
     }
 }

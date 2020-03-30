@@ -1,9 +1,9 @@
 ﻿using System;
-using TecLibras.Infra.CrossCutting.Identity.Models;
-using TecLibras.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TecLibras.Services.Api.Context;
+using TecLibras.Services.Api.Models;
 
 namespace TecLibras.Services.Api.Configurations
 {
@@ -13,14 +13,12 @@ namespace TecLibras.Services.Api.Configurations
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            // services.AddDbContext<ApplicationDbContext>(options =>
+            //     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<TecLibrasContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDbContext<EventStoreSqlContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
         }
     }
 }

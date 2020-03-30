@@ -1,25 +1,21 @@
 using System;
-using TecLibras.Application.Interfaces;
-using TecLibras.Application.ViewModels;
-using TecLibras.Domain.Core.Bus;
-using TecLibras.Domain.Core.Notifications;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TecLibras.Services.Api.ViewModels;
+using TecLibras.Services.Api.Repositories;
 
 namespace TecLibras.Services.Api.Controllers
 {
     [Authorize]
     public class PointsController : ApiController
     {
-        private readonly IPointsAppService _pointsAppService;
+        private readonly IPointsRepository _pointsRepository;
 
         public PointsController(
-            IPointsAppService pointsAppService,
-            INotificationHandler<DomainNotification> notifications,
-            IMediatorHandler mediator) : base(notifications, mediator)
+            IPointsRepository pointsRepository) : base()
         {
-            _pointsAppService = pointsAppService;
+            _pointsRepository = pointsRepository;
         }
 
         [HttpGet]
@@ -27,7 +23,7 @@ namespace TecLibras.Services.Api.Controllers
         [Route("points")]
         public IActionResult Get()
         {
-            return Response(_pointsAppService.GetAll());
+            return Response(_pointsRepository.GetAll());
         }
 
         [HttpGet]
@@ -35,7 +31,7 @@ namespace TecLibras.Services.Api.Controllers
         [Route("points/{id:guid}")]
         public IActionResult Get(Guid id)
         {
-            var pointsViewModel = _pointsAppService.GetById(id);
+            var pointsViewModel = _pointsRepository.GetById(id);
 
             return Response(pointsViewModel);
         }     
@@ -51,7 +47,7 @@ namespace TecLibras.Services.Api.Controllers
                 return Response(pointsViewModel);
             }
 
-            _pointsAppService.Register(pointsViewModel);
+            //_pointsRepository.Add(pointsViewModel); TODO
 
             return Response(pointsViewModel);
         }

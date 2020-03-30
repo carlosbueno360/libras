@@ -1,9 +1,8 @@
 ﻿using System;
-using TecLibras.Infra.CrossCutting.Identity.Authorization;
-using TecLibras.Infra.CrossCutting.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TecLibras.UI.Web.Models;
 
 namespace TecLibras.UI.Web.Extensions
 {
@@ -36,11 +35,11 @@ namespace TecLibras.UI.Web.Extensions
                     googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
                 });
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("CanWritePointsData", policy => policy.Requirements.Add(new ClaimRequirement("Pointss", "Write")));
-                options.AddPolicy("CanRemovePointsData", policy => policy.Requirements.Add(new ClaimRequirement("Pointss", "Remove")));
-            });
+            // services.AddAuthorization(options =>
+            // {
+            //     options.AddPolicy("CanWritePointsData", policy => policy.Requirements.Add(new ClaimRequirement("Pointss", "Write")));
+            //     options.AddPolicy("CanRemovePointsData", policy => policy.Requirements.Add(new ClaimRequirement("Pointss", "Remove")));
+            // });
         }
     }
 }

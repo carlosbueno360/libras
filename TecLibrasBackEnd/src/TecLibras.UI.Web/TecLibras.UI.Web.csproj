@@ -22,12 +22,7 @@
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <ProjectReference Include="..\TecLibras.Application\TecLibras.Application.csproj" />
-    <ProjectReference Include="..\TecLibras.Infra.CrossCutting.Identity\TecLibras.Infra.CrossCutting.Identity.csproj" />
-    <ProjectReference Include="..\TecLibras.Infra.CrossCutting.IoC\TecLibras.Infra.CrossCutting.IoC.csproj" />
+    
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
   </ItemGroup>
 </Project>
