@@ -25,7 +25,7 @@ namespace TecLibras.Services.Api.Configurations
             services.AddSingleton<IAuthorizationHandler, ClaimsRequirementHandler>();
 
             // Infra - Data
-            services.AddScoped<IPointsRepository, PointsRepository>();
+            services.AddScoped<IPointEventRepository, PointEventRepository>();
             services.AddScoped<TecLibrasContext>();
 
             // Infra - Identity

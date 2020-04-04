@@ -13,8 +13,8 @@ namespace TecLibras.Services.Api.Configurations
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            // services.AddDbContext<ApplicationDbContext>(options =>
-            //     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options =>
+                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<TecLibrasContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));

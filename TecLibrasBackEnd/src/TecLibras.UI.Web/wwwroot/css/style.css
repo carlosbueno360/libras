@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa&display=swap');
+
+html{
+    scroll-behavior: smooth;
+    background-color: #fcfcfc;
+}
+
+main, header, footer{
+    font-family: 'Comfortaa', cursive!important;
+}
+/*---------------------------------------------------- Navbar ------------------------------------------------------*/
+
+
+nav ul{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+nav li a{
+    margin-left: 1rem;
+    font-weight: bolder;
+    border-radius: 5px;
+    color: white;
+}
+
+nav li a:hover{
+    color: rgb(34, 34, 34);
+    transition: .5s;
+    background-color:#fff;
+}
+/*--------------------------------------------------- //Navbar -----------------------------------------------------*/
+
+/*--------------------------------------------------- Index.html ---------------------------------------------------*/
+
+.header-slide{
+    display: flex;
+    align-items: flex-end;
+    min-height: 10vh;
+}

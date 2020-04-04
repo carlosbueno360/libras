@@ -4,18 +4,22 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TecLibras.Services.Api.ViewModels;
 using TecLibras.Services.Api.Repositories;
+using AutoMapper;
+using TecLibras.Services.Api.Model;
 
 namespace TecLibras.Services.Api.Controllers
 {
     [Authorize]
     public class PointsController : ApiController
     {
-        private readonly IPointsRepository _pointsRepository;
+        private readonly IMapper _mapper;
+        private readonly IPointEventRepository _pointsRepository;
 
-        public PointsController(
-            IPointsRepository pointsRepository) : base()
+        public PointsController(IMapper mapper,
+            IPointEventRepository pointsRepository) : base()
         {
             _pointsRepository = pointsRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -37,7 +41,8 @@ namespace TecLibras.Services.Api.Controllers
         }     
 
         [HttpPost]
-        [Authorize(Policy = "CanWritePointsData")]
+        //[Authorize(Policy = "CanWritePointsData")]
+        [AllowAnonymous]
         [Route("points")]
         public IActionResult Post([FromBody]PointsViewModel pointsViewModel)
         {
@@ -46,8 +51,9 @@ namespace TecLibras.Services.Api.Controllers
                 NotifyModelStateErrors();
                 return Response(pointsViewModel);
             }
-
-            //_pointsRepository.Add(pointsViewModel); TODO
+            var pointEvent = _mapper.Map<PointEvent>(pointsViewModel);
+            _pointsRepository.Add(pointEvent);
+            _pointsRepository.SaveChanges();
 
             return Response(pointsViewModel);
         }

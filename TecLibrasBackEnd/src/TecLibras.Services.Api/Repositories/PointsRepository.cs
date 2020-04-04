@@ -1,11 +1,11 @@
 using TecLibras.Services.Api.Context;
-using TecLibras.Services.Api.Models;
+using TecLibras.Services.Api.Model;
 
 namespace TecLibras.Services.Api.Repositories
 {
-     public class PointsRepository : Repository<Points>, IPointsRepository
+     public class PointEventRepository : Repository<PointEvent>, IPointEventRepository
     {
-        public PointsRepository(TecLibrasContext context)
+        public PointEventRepository(TecLibrasContext context)
             : base(context)
         {
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TecLibras.UI.Web.Models;
@@ -11,11 +12,11 @@ namespace TecLibras.UI.Web.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            // services.AddDbContext<ApplicationDbContext>(options =>
-            //     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            // services.AddDbContext<TecLibrasContext>(options =>
-            //     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+             //services.AddDbContext<TecLibrasContext>(options =>
+             //    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             // services.AddDbContext<EventStoreSqlContext>(options =>
             //     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));

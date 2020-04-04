@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using TecLibras.Services.Api.Model;
 using TecLibras.Services.Api.Models;
 using TecLibras.Services.Api.ViewModels;
 
@@ -8,7 +9,7 @@ namespace TecLibras.Services.Api.AutoMapper
     {
         public DomainToViewModelMappingProfile()
         {
-            CreateMap<Points, PointsViewModel>();
+            CreateMap<PointEvent, PointsViewModel>().ReverseMap();
         }
     }
 }

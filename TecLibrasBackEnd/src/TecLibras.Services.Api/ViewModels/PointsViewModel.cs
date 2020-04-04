@@ -13,5 +13,13 @@ namespace TecLibras.Services.Api.ViewModels
         [DisplayName("Name")]
         public int Points { get; set; }
 
+        [Required(ErrorMessage = "The DateTime is Required")]
+        [DisplayName("DateTime")]
+        public DateTime DateTime { get;  set; }
+
+        [Required(ErrorMessage = "The UserId is Required")]
+        [DisplayName("UserId")]
+        public Guid UserId { get;  set; }
+
     }
 }
