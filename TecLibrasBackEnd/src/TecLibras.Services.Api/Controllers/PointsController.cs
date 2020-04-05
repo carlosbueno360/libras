@@ -15,11 +15,14 @@ namespace TecLibras.Services.Api.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IPointEventRepository _pointsRepository;
+        private readonly IRankRepository _rankRepository;
 
         public PointsController(IMapper mapper,
-            IPointEventRepository pointsRepository) : base()
+            IPointEventRepository pointsRepository,
+            IRankRepository rankRepository) : base()
         {
             _pointsRepository = pointsRepository;
+            _rankRepository = rankRepository;
             _mapper = mapper;
         }
 
@@ -40,7 +43,7 @@ namespace TecLibras.Services.Api.Controllers
             var pointsViewModel = _pointsRepository.GetByUserId(userId).ToList();
 
             return Response(pointsViewModel);
-        }
+        }     
 
         [HttpPost]
         //[Authorize(Policy = "CanWritePointsData")]
@@ -48,16 +51,47 @@ namespace TecLibras.Services.Api.Controllers
         [Route("points")]
         public IActionResult Post([FromBody]PointsViewModel pointsViewModel)
         {
+            // Validação dos dados
             if (!ModelState.IsValid)
             {
-                NotifyModelStateErrors();
+                NotifyModelStateErrors();//Verifica se há erros
                 return Response(pointsViewModel);
             }
+
+            // Adiciona pontos na tabela de pontos
             var pointEvent = _mapper.Map<PointEvent>(pointsViewModel);
             _pointsRepository.Add(pointEvent);
-            _pointsRepository.SaveChanges();
+
+
+            if (_pointsRepository.SaveChanges() > 0)
+            {
+                // Caso seja gravado pontos, iremos somar todos os pontos já acumulados e adicionar ou atualizar a tabela de rank
+                UpdateRank(pointsViewModel);
+            }
 
             return Response(pointsViewModel);
+        }
+
+
+        private void UpdateRank(PointsViewModel pointsViewModel)
+        {
+            // Busca todos pontos do Usuario
+            var points = _pointsRepository.GetByUserId(pointsViewModel.UserId).ToList();
+            var totalPoints = points.Sum(x => x.Points); // Soma os pontos
+
+            // Busca rank do Usuario, pois caso não exista deve ser criado um novo, caso contrario apenas atualizado
+            var userRank = _rankRepository.GetByUserId(pointsViewModel.UserId);
+            if (userRank is null) // Se rank for nulo irá gravar um rank novo
+            {
+                userRank = new Rank(pointsViewModel.UserId, totalPoints);
+                _rankRepository.Add(userRank);
+            }
+            else
+            {
+                userRank.Update(totalPoints);// Esse caso existe rank então ele irá apenas atualizar os pontos totais
+                _rankRepository.Update(userRank);
+            }
+            _rankRepository.SaveChanges();
         }
     }
 }

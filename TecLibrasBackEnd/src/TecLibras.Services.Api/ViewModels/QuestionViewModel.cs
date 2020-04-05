@@ -21,5 +21,8 @@ namespace TecLibras.Services.Api.ViewModels
         [DisplayName("Points")]
         public int Points { get; set; }
 
+        [Required(ErrorMessage = "The Level is Required")]
+        [DisplayName("Level")]
+        public int Level { get; set; }
     }
 }

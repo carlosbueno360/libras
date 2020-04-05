@@ -15,6 +15,11 @@ namespace TecLibras.Services.Api.Model
             UserId = userId;
         }
 
+        public void Update(int points) 
+        {
+            Points = points;
+        }
+
         protected Rank() { }
 
         public Guid UserId { get; private set; }

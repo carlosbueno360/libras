@@ -8,5 +8,6 @@ namespace TecLibras.Services.Api.Repositories
 {
     public interface IRankRepository : IRepository<Rank>
     {
+        Rank GetByUserId(Guid userId);
     }
 }
