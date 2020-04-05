@@ -16,6 +16,8 @@ namespace TecLibras.Services.Api.Model
             Level = level;
         }
 
+        protected Question() { }
+
         public int Level { get; private set; }
 
         public int Points { get; private set; }
