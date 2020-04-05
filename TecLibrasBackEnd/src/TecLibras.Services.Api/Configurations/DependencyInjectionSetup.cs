@@ -26,6 +26,8 @@ namespace TecLibras.Services.Api.Configurations
 
             // Infra - Data
             services.AddScoped<IPointEventRepository, PointEventRepository>();
+            services.AddScoped<IRankRepository, RankRepository>();
+            services.AddScoped<IQuestionsRepository, QuestionsRepository>();
             services.AddScoped<TecLibrasContext>();
 
             // Infra - Identity

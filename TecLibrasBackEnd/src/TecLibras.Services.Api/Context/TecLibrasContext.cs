@@ -14,7 +14,9 @@ namespace TecLibras.Services.Api.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new PointEventsMap());
-                        
+            modelBuilder.ApplyConfiguration(new QuestionMap());
+            modelBuilder.ApplyConfiguration(new RankMap());
+
             base.OnModelCreating(modelBuilder);
         }
     }

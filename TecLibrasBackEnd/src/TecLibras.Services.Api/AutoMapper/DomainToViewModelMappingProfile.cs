@@ -10,6 +10,8 @@ namespace TecLibras.Services.Api.AutoMapper
         public DomainToViewModelMappingProfile()
         {
             CreateMap<PointEvent, PointsViewModel>().ReverseMap();
+            CreateMap<Rank, RankViewModel>().ReverseMap();
+            CreateMap<Question, QuestionViewModel>().ReverseMap();
         }
     }
 }

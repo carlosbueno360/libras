@@ -1,23 +1,20 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace TecLibras.Services.Api.ViewModels
 {
-    public class PointsViewModel
+    public class RankViewModel
     {
-
         [Required(ErrorMessage = "The Points is Required")]
-        [DisplayName("Name")]
+        [DisplayName("Points")]
         public int Points { get; set; }
-
-        [Required(ErrorMessage = "The DateTime is Required")]
-        [DisplayName("DateTime")]
-        public DateTime DateTime { get;  set; }
 
         [Required(ErrorMessage = "The UserId is Required")]
         [DisplayName("UserId")]
-        public Guid UserId { get;  set; }
-
+        public Guid UserId { get; set; }
     }
 }

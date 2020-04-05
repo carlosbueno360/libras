@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
+using TecLibras.UI.Web.Clients;
 
 namespace TecLibras.UI.Web.Extensions
 {
@@ -9,7 +10,8 @@ namespace TecLibras.UI.Web.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            //NativeInjectorBootStrapper.RegisterServices(services);
+            // Clients
+            services.AddScoped<IPointsClientApi, PointsClientApi>();
         }
     }
 }

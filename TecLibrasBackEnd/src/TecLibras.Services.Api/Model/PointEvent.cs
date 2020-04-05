@@ -8,9 +8,9 @@ namespace TecLibras.Services.Api.Model
     public class PointEvent : Entity
     {
 
-        public PointEvent(Guid id, Guid userId, int points )
+        public PointEvent(Guid userId, int points )
         {
-            Id = id;
+            Id = Guid.NewGuid();
             DateTime = DateTime.UtcNow;
             Points = points;
             UserId = userId;

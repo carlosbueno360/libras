@@ -6,6 +6,7 @@ using TecLibras.Services.Api.ViewModels;
 using TecLibras.Services.Api.Repositories;
 using AutoMapper;
 using TecLibras.Services.Api.Model;
+using System.Linq;
 
 namespace TecLibras.Services.Api.Controllers
 {
@@ -30,15 +31,16 @@ namespace TecLibras.Services.Api.Controllers
             return Response(_pointsRepository.GetAll());
         }
 
+
         [HttpGet]
         [AllowAnonymous]
-        [Route("points/{id:guid}")]
-        public IActionResult Get(Guid id)
+        [Route("points/{userId:guid}")]
+        public IActionResult GetByUserId(Guid userId)
         {
-            var pointsViewModel = _pointsRepository.GetById(id);
+            var pointsViewModel = _pointsRepository.GetByUserId(userId).ToList();
 
             return Response(pointsViewModel);
-        }     
+        }
 
         [HttpPost]
         //[Authorize(Policy = "CanWritePointsData")]
