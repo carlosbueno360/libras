@@ -3,12 +3,13 @@ using System;
 using System.Linq;
 using TecLibras.Services.Api.Context;
 using TecLibras.Services.Api.Model;
+using TecLibras.Services.Api.Models;
 
 namespace TecLibras.Services.Api.Repositories
 {
      public class PointEventRepository : Repository<PointEvent>, IPointEventRepository
     {
-        public PointEventRepository(TecLibrasContext context)
+        public PointEventRepository(ApplicationDbContext context)
             : base(context)
         {
 

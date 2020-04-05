@@ -16,5 +16,16 @@ namespace TecLibras.Services.Api.ViewModels
         [Required(ErrorMessage = "The UserId is Required")]
         [DisplayName("UserId")]
         public Guid UserId { get; set; }
+
+        
+        public ApplicationUserViewModel User { get; set; }
+    }
+
+    public class ApplicationUserViewModel
+    {
+        public Guid Id { get; set; }
+
+        public string UserName { get; set; }
+
     }
 }

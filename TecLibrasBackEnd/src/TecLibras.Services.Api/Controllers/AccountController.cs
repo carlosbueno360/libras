@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using TecLibras.Services.Api.Models;
+using TecLibras.Services.Api.Model;
 
 namespace TecLibras.Services.Api.Controllers
 {
@@ -16,13 +17,13 @@ namespace TecLibras.Services.Api.Controllers
     [ApiController]
     public class AccountController : ApiController
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly AppSettings _appSettings;
 
         public AccountController(
-            SignInManager<IdentityUser> signInManager,
-            UserManager<IdentityUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            UserManager<ApplicationUser> userManager,
             IOptions<AppSettings> appSettings) : base()
         {
             _userManager = userManager;
@@ -40,9 +41,11 @@ namespace TecLibras.Services.Api.Controllers
                 return Response(userRegistration);
             }
 
-            var user = new IdentityUser
+            var user = new ApplicationUser
             {
-                UserName = userRegistration.Email,
+                Firstname = userRegistration.Firstname,
+                Lastname = userRegistration.Lastname,
+                UserName = userRegistration.Username,
                 Email = userRegistration.Email,
                 EmailConfirmed = true
             };

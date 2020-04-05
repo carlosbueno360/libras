@@ -30,5 +30,13 @@ namespace TecLibras.UI.Web.Controllers
             var points = await _pointsClientApi.GetPointsByUserId(userId);
             return View(points);
         }
+
+        [HttpGet]
+        [Route("points/rank")]
+        public async Task<IActionResult> Rank()
+        {
+            var points = await _pointsClientApi.GetPointsRank();
+            return View(points);
+        }
     }
 }

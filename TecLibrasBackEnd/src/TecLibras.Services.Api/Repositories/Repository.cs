@@ -4,13 +4,14 @@ namespace TecLibras.Services.Api.Repositories
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
     using TecLibras.Services.Api.Context;
+    using TecLibras.Services.Api.Models;
 
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        protected readonly TecLibrasContext Db;
+        protected readonly ApplicationDbContext Db;
         protected readonly DbSet<TEntity> DbSet;
 
-        public Repository(TecLibrasContext context)
+        public Repository(ApplicationDbContext context)
         {
             Db = context;
             DbSet = Db.Set<TEntity>();

@@ -26,11 +26,13 @@ namespace TecLibras.UI.Web.Clients
             return retorno.data;
         }
 
-        public async Task<List<PointsViewModel>> GetPointsRank()
+        public async Task<List<RankViewModel>> GetPointsRank()
         {
-            var request = new RestRequest($"points/rank", DataFormat.Json);
+            var request = new RestRequest($"rank", DataFormat.Json);
 
-            return await _client.GetAsync<List<PointsViewModel>>(request);
+            var retorno = await _client.GetAsync<ResponseApi<List<RankViewModel>>>(request);
+
+            return retorno.data;
         }
     }
 }

@@ -12,6 +12,7 @@ namespace TecLibras.Services.Api.AutoMapper
             CreateMap<PointEvent, PointsViewModel>().ReverseMap();
             CreateMap<Rank, RankViewModel>().ReverseMap();
             CreateMap<Question, QuestionViewModel>().ReverseMap();
+            CreateMap<ApplicationUser, ApplicationUserViewModel>().ReverseMap();
         }
     }
 }

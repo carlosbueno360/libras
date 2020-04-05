@@ -28,7 +28,7 @@ namespace TecLibras.Services.Api.Controllers
         [Route("Rank")]
         public IActionResult Get()
         {
-            return Response(_rankRepository.GetAll().OrderByDescending(o=>o.Points ));
+            return Response(_rankRepository.GetAllWithApplicationUser());
         }
     }
 }

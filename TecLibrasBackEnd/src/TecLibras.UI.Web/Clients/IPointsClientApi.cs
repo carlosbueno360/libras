@@ -8,6 +8,6 @@ namespace TecLibras.UI.Web.Clients
     public interface IPointsClientApi
     {
         Task<List<PointsViewModel>> GetPointsByUserId(Guid userId);
-        Task<List<PointsViewModel>> GetPointsRank();
+        Task<List<RankViewModel>> GetPointsRank();
     }
 }

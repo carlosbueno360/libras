@@ -16,9 +16,6 @@ namespace TecLibras.Services.Api.Configurations
             services.AddDbContext<ApplicationDbContext>(options =>
                  options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDbContext<TecLibrasContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-
         }
     }
 }

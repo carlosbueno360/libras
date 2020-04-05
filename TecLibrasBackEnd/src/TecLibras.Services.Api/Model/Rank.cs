@@ -12,7 +12,7 @@ namespace TecLibras.Services.Api.Model
         {
             Id = Guid.NewGuid();
             Points = points;
-            UserId = userId;
+            ApplicationUserId = userId.ToString();
         }
 
         public void Update(int points) 
@@ -22,9 +22,12 @@ namespace TecLibras.Services.Api.Model
 
         protected Rank() { }
 
-        public Guid UserId { get; private set; }
+        public string ApplicationUserId { get; private set; }
 
         public int Points { get; private set; }
+
+
+        public ApplicationUser ApplicationUser { get; private set; }
 
     }
 }
