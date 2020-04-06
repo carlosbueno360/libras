@@ -12,9 +12,9 @@ namespace TecLibras.UI.Web.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.AddDefaultIdentity<IdentityUser>(options =>
+            services.AddDefaultIdentity<ApplicationUser>(options =>
                 {
-                    options.SignIn.RequireConfirmedAccount = true;
+                    options.SignIn.RequireConfirmedAccount = false;
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
         }
