@@ -10,5 +10,6 @@ namespace TecLibras.Services.Api.Repositories
     
     public interface IPointEventRepository : IRepository<PointEvent>
     {
+        IQueryable<PointEvent> GetByUserId(Guid userId);
     }
 }

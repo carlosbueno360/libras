@@ -3,126 +3,126 @@
 @{
     ViewData["Title"] = "Points Management";
 }
-
-<style>
-    .modal-lg {
-        max-width: 80%;
-    }
-</style>
-
-<div>
-    <h2>@ViewData["Title"]</h2>
-</div>
-<hr />
-
-<div class="row">
-    <div class="col-md-12">
-        <div>
-            <div class="pull-left">
-                <a asp-action="Create" class="btn btn-primary">
-                    <span title="Register New" class="fas fa-plus"></span> Register New
-                </a>
-            </div>
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <!-- Main row -->
+        <div class="row">
+            <!-- Left col -->
+            <section class="col-lg-12 connectedSortable">
+                <!-- Grafico de Presenças-->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-chart-pie mr-1"></i>
+                            Grafico de evolução
+                        </h3>
+                    </div><!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="tab-content p-0">
+                            <canvas id="chLine" height="100"></canvas>
+                        </div>
+                    </div><!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+                <!-- Map card -->
+                <div class="card bg-gradient-primary" style="display: none;">
+                    <div class="card-header border-0">
+                        <h3 class="card-title">
+                            <i class="fas fa-map-marker-alt mr-1"></i>
+                            Visitors
+                        </h3>
+                        <!-- card tools -->
+                        <div class="card-tools">
+                            <button type="button"
+                                    class="btn btn-primary btn-sm daterange"
+                                    data-toggle="tooltip"
+                                    title="Date range">
+                                <i class="far fa-calendar-alt"></i>
+                            </button>
+                            <button type="button"
+                                    class="btn btn-primary btn-sm"
+                                    data-card-widget="collapse"
+                                    data-toggle="tooltip"
+                                    title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                        <!-- /.card-tools -->
+                    </div>
+                    <div class="card-body">
+                        <div id="world-map" style="height: 250px; width: 100%;"></div>
+                    </div>
+                    <!-- /.card-body-->
+                    <div class="card-footer bg-transparent">
+                        <div class="row">
+                            <div class="col-4 text-center">
+                                <div id="sparkline-1"></div>
+                                <div class="text-white">Visitors</div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-4 text-center">
+                                <div id="sparkline-2"></div>
+                                <div class="text-white">Online</div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-4 text-center">
+                                <div id="sparkline-3"></div>
+                                <div class="text-white">Sales</div>
+                            </div>
+                            <!-- ./col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+                <!-- /.card -->
+            </section>
+            <!-- right col -->
         </div>
-    </div>
-</div>
-<br />
-
-<div class="panel panel-default">
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Points)
-            </th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Points)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" title="Edit" class="btn btn-warning">
-                        <span class="fas fa-edit"></span>
-                    </a>
-                        
-                    <a asp-action="Details" asp-route-id="@item.Id" title="Details" class="btn btn-primary">
-                        <span class="fas fa-search"></span>
-                    </a>
-                        
-                    <a asp-action="Delete" asp-route-id="@item.Id" title="Delete" class="btn btn-danger">
-                        <span class="fas fa-trash-alt"></span>
-                    </a>
-                    
-                    <button type="button" class="btn btn-info viewbutton" title="History" data-id="@item.Id" data-toggle="modal" data-target="#pointsHistory">
-                        <span class="fas fa-clock"></span>
-                    </button>
-                </td>
-            </tr>
-        }
-        </tbody>
-    </table>
-</div>
-
-
-
-<div class="modal fade" id="pointsHistory" tabindex="-1" role="dialog" aria-labelledby="historyModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="historyModalLabel">Points Data History</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p id="pointsHistoryData"></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
+        <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
 
 @section scripts
 {
     <script type="text/javascript">
-        $(".viewbutton").on("click", function() {
-            var pointsId = $(this).data('id');
-            $.ajax({
-                url: "https://localhost:44314/points-management/points-history/" + pointsId,
-                //url: "http://TecLibrasproject.azurewebsites.net/points-management/points-history/" + pointsId,
-                cache: false
-            }).done(function(data) {
-                var formatHtml = "<table class='table table-striped'>";
-                formatHtml += "<thead><th>Action</th><th>When</th><th>Id</th><th>Name</th><th>E-mail</th><th>Birth Date</th><th>By User</th></thead>";
+        /* chart.js chart examples */
 
-                for (var i = 0; i < data.length; i++) {
-                    var change = data[i];
-                    formatHtml += "<tr>";
-                    formatHtml += "<td>" + change.action + "</td>";
-                    formatHtml += "<td>" + change.timestamp + "</td>";
-                    formatHtml += "<td>" + change.id + "</td>";
-                    formatHtml += "<td>" + change.name + "</td>";
-                    formatHtml += "<td>" + change.email + "</td>";
-                    formatHtml += "<td>" + change.birthDate + "</td>";
-                    formatHtml += "<td>" + change.who + "</td>";
-                    formatHtml += "</tr>";
+        // chart colors
+        var colors = ['#007bff', '#28a745', '#333333', '#c3e6cb', '#dc3545', '#6c757d'];
+
+        /* large line chart */
+        var chLine = document.getElementById("chLine");
+        var chartData = {
+            labels: ["06/04/2020", "07/04/2020", "08/04/2020", "09/04/2020", "10/04/2020", "11/04/2020", "12/04/2020"],
+            datasets: [
+            {
+                data: [639, 465, 493, 478, 589, 632, 674],
+                backgroundColor: colors[3],
+                borderColor: colors[1],
+                borderWidth: 4,
+                pointBackgroundColor: colors[1]
+            }]
+        };
+
+        if (chLine) {
+            new Chart(chLine, {
+                type: 'line',
+                data: chartData,
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: false
+                            }
+                        }]
+                    },
+                    legend: {
+                        display: false
+                    }
                 }
-                formatHtml += "</table>";
-                $("#pointsHistoryData").html(formatHtml);
             });
-        });
-</script>
+        }
+    </script>
 }

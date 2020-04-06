@@ -12,9 +12,9 @@ namespace TecLibras.UI.Web.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.AddDefaultIdentity<IdentityUser>(options =>
+            services.AddDefaultIdentity<ApplicationUser>(options =>
                 {
-                    options.SignIn.RequireConfirmedAccount = true;
+                    options.SignIn.RequireConfirmedAccount = false;
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
         }
@@ -23,23 +23,6 @@ namespace TecLibras.UI.Web.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.AddAuthentication()
-                .AddFacebook(o =>
-                {
-                    o.AppId = configuration["Authentication:Facebook:AppId"];
-                    o.AppSecret = configuration["Authentication:Facebook:AppSecret"];
-                })
-                .AddGoogle(googleOptions =>
-                {
-                    googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
-                    googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
-                });
-
-            // services.AddAuthorization(options =>
-            // {
-            //     options.AddPolicy("CanWritePointsData", policy => policy.Requirements.Add(new ClaimRequirement("Pointss", "Write")));
-            //     options.AddPolicy("CanRemovePointsData", policy => policy.Requirements.Add(new ClaimRequirement("Pointss", "Remove")));
-            // });
         }
     }
 }
