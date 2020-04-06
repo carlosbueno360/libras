@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TecLibras.UI.Web.Clients;
+using TecLibras.UI.Web.ViewComponents;
 
 namespace TecLibras.UI.Web.Controllers
 {
@@ -28,7 +30,8 @@ namespace TecLibras.UI.Web.Controllers
             var userId = user.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier)
                    .Select(c => new Guid(c.Value)).SingleOrDefault();
             var points = await _pointsClientApi.GetPointsByUserId(userId);
-            return View(points);
+            RankChartView rankChart = new RankChartView(points);
+            return View(rankChart);
         }
 
         [HttpGet]
@@ -38,5 +41,26 @@ namespace TecLibras.UI.Web.Controllers
             var points = await _pointsClientApi.GetPointsRank();
             return View(points);
         }
+    }
+
+    public class RankChartView
+    {
+        public RankChartView(List<PointsViewModel> pointsViewModels)
+        {
+            Dates = new List<String>();
+            Points = new List<Decimal>();
+            pointsViewModels.GroupBy(x => x.DateTime.ToShortDateString())
+                .ToList()
+                .ForEach(x =>
+                {
+                    Dates.Add(x.Key);
+                    Points.Add(x.Sum(x=>x.Points));
+                });
+
+
+        }
+        public List<Decimal> Points { get; set; }
+
+        public List<String> Dates { get; set; }
     }
 }
