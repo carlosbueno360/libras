@@ -79,7 +79,7 @@ namespace TecLibras.Services.Api.Controllers
             }
 
             var result = await _signInManager.PasswordSignInAsync(userLogin.Email, userLogin.Password, false, true);
-
+       
             if (result.Succeeded)
             {
                 var token = await GenerateJwt(userLogin.Email);
@@ -91,14 +91,14 @@ namespace TecLibras.Services.Api.Controllers
 
         private async Task<string> GenerateJwt(string email)
         {
-            var user = await _userManager.FindByEmailAsync(email);
-            var claims = await _userManager.GetClaimsAsync(user);
+            //var user = await _userManager.FindByIdAsync(email);
+            //var claims = await _userManager.GetClaimsAsync(user);
 
-            claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.Id));
-            claims.Add(new Claim(JwtRegisteredClaimNames.Email, user.Email));
+            //claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.Id));
+            //claims.Add(new Claim(JwtRegisteredClaimNames.Email, user.Email));
 
             var identityClaims = new ClaimsIdentity();
-            identityClaims.AddClaims(claims);
+            //identityClaims.AddClaims(claims);
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
