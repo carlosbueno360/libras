@@ -1,4 +1,6 @@
-﻿using AppTECLIBRAS.Tables;
+﻿using AppTECLIBRAS.Clients;
+using AppTECLIBRAS.Tables;
+using AppTECLIBRAS.ViewModels;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -38,11 +40,22 @@ namespace AppTECLIBRAS.Views
                 senhaEntry.Focus();
                 return;        /*FIM DA VERIFICAÇÃO DOS CAMPOS*/
             }
-            var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
-            var db = new SQLiteConnection(dbpath);
-            var myquery = db.Table<RegUserTable>().Where(u => u.Email.Equals(emailEntry.Text) && u.Senha.Equals(senhaEntry.Text)).FirstOrDefault();
 
-            if (myquery != null)
+            UserLogin userLogin = new UserLogin() { 
+                 Email = emailEntry.Text,
+                 Password = senhaEntry.Text
+            };
+            AuthClient authClient = new AuthClient();
+
+            var token = await authClient.Login(userLogin);
+            var IsLoggedIn = true;
+            if (string.IsNullOrWhiteSpace(token))
+                IsLoggedIn = false;
+
+            SetProperties("IsLoggedIn", IsLoggedIn);
+
+
+            if (IsLoggedIn)
             {
                 App.Current.MainPage = new NavigationPage(new PagePrincipal());
                 
@@ -66,6 +79,13 @@ namespace AppTECLIBRAS.Views
                 });
 
             }
+        }
+
+        public async static void SetProperties(string property, object value)
+        {
+            var app = (App)Application.Current;
+            app.Properties[property] = value;
+            await app.SavePropertiesAsync();
         }
 
         async void Cad_Clicked(object sender, EventArgs e)

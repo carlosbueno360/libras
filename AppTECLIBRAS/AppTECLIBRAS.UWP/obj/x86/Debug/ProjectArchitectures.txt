@@ -1,0 +1,1 @@
+C:\development\libras\AppTECLIBRAS\AppTECLIBRAS.UWP\AppTECLIBRAS.UWP.csproj;x86

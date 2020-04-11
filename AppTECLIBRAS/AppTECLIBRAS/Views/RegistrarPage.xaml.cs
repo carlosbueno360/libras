@@ -1,4 +1,7 @@
-﻿using AppTECLIBRAS.Tables;
+﻿using AppTECLIBRAS.Clients;
+using AppTECLIBRAS.Tables;
+using AppTECLIBRAS.ViewModels;
+using Refit;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -12,17 +15,20 @@ using Xamarin.Forms.Xaml;
 
 namespace AppTECLIBRAS.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class RegistrarPage : ContentPage
-	{
-		public RegistrarPage ()
-		{
-			InitializeComponent ();
-		}
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class RegistrarPage : ContentPage
+    {
+       
+
+        public RegistrarPage()
+        {
+            
+            InitializeComponent();
+        }
 
         async void RegButton_Clicked(object sender, EventArgs e)
         {
-             if (String.IsNullOrEmpty(NomeEntry.Text))
+            if (String.IsNullOrEmpty(NomeEntry.Text))
             {
                 await DisplayAlert("Erro!", "Digite um Nome Válido", "Aceitar");
                 NomeEntry.Focus();
@@ -41,27 +47,48 @@ namespace AppTECLIBRAS.Views
                 senhaEntry.Focus();
                 return;        /*FIM DA VERIFICAÇÃO DOS CAMPOS*/
             }
-            var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
-            var db = new SQLiteConnection(dbpath);
-            db.CreateTable<RegUserTable>();
 
-            var item = new RegUserTable()
+
+            var userRegistration = new UserRegistration()
             {
-                UserName = NomeEntry.Text,
+                Username = NomeEntry.Text,
                 Email = emailEntry.Text,
-                Senha = senhaEntry.Text,
+                Password = senhaEntry.Text,
+                PasswordConfirm = senhaEntry.Text
             };
 
-            db.Insert(item);
+            AuthClient authClient = new AuthClient();
+
+            var token = await authClient.RegisterUser(userRegistration);
+
+            if (string.IsNullOrWhiteSpace(token))
+                return;
+
+            SetProperties("IsLoggedIn", true);
+   
             Device.BeginInvokeOnMainThread(async () =>
             {
                 var result = await this.DisplayAlert("Parabéns", "Usuário Registrado com Sucesso", "OK",".");
                 if (result)
                 {
-                    await Navigation.PushAsync(new LoginPage());
+                    await Navigation.PushAsync(new PagePrincipal());
                 }
-
             });
         }
+
+        public async static void SetProperties(string property, object value)
+        {
+            var app = (App)Application.Current;
+            app.Properties[property] = value;
+            await app.SavePropertiesAsync();
+        }
+    }
+
+
+   
+
+    public class RestEndPoints
+    {
+        public static string BaseUrl => "https://192.168.1.79:45455/";
     }
 }

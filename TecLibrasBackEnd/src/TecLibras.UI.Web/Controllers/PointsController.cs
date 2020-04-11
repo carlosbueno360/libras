@@ -26,10 +26,16 @@ namespace TecLibras.UI.Web.Controllers
         [Route("points/list-all")]
         public async Task<IActionResult> Index()
         {
-            var user = HttpContext.User;
+            var user = HttpContext.User;// Get user Context 
+
+            // Get userId from user Claims
             var userId = user.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier)
                    .Select(c => new Guid(c.Value)).SingleOrDefault();
+
+            // Get all history of point to this user by Id
             var points = await _pointsClientApi.GetPointsByUserId(userId);
+
+            //Pass the points 
             RankChartView rankChart = new RankChartView(points);
             return View(rankChart);
         }
@@ -54,10 +60,8 @@ namespace TecLibras.UI.Web.Controllers
                 .ForEach(x =>
                 {
                     Dates.Add(x.Key);
-                    Points.Add(x.Sum(x=>x.Points));
+                    Points.Add(x.Sum(x => x.Points));
                 });
-
-
         }
         public List<Decimal> Points { get; set; }
 

@@ -1,4 +1,7 @@
-﻿using AppTECLIBRAS.Views;
+﻿using AppTECLIBRAS.Clients;
+using AppTECLIBRAS.ViewModels;
+using AppTECLIBRAS.Views;
+using Refit;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,8 +13,17 @@ namespace AppTECLIBRAS
     {
         public App()
         {
+
             InitializeComponent();
-            MainPage = new NavigationPage(new PagePrincipal());
+            bool isLoggedIn = Application.Current.Properties.ContainsKey("IsLoggedIn") ? Convert.ToBoolean(App.Current.Properties["IsLoggedIn"]) : false;
+
+            if (isLoggedIn)
+            {
+                MainPage = new NavigationPage(new PagePrincipal());
+            }else 
+            {
+                MainPage = new NavigationPage(new LoginPage());
+            }
 
         }
 
