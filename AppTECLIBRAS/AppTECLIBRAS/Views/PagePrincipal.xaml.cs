@@ -1,4 +1,8 @@
-﻿using System;
+﻿using AppTECLIBRAS.Clients;
+using AppTECLIBRAS.ViewModels;
+using Refit;
+using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,13 +13,13 @@ using Xamarin.Forms.Xaml;
 
 namespace AppTECLIBRAS.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class PagePrincipal : MasterDetailPage
-	{
-		public PagePrincipal ()
-		{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class PagePrincipal : MasterDetailPage
+    {
+        public PagePrincipal()
+        {
             SetValue(NavigationPage.HasNavigationBarProperty, false);  /*ESCONDE A NAVEBAR DO LOGIN DESCONFIGURA ESSA PAGE*/
-			InitializeComponent ();
+            InitializeComponent();
             BtHome_Clicked(new Object(), new EventArgs());
         }
 
@@ -51,9 +55,15 @@ namespace AppTECLIBRAS.Views
 
         async void BtSair_Clicked(object sender, EventArgs e)
         {
+            SetProperties("IsLoggedIn", false);
             await Navigation.PushAsync(new LoginPage());
         }
 
-       
+        public async static void SetProperties(string property, object value)
+        {
+            var app = (App)Application.Current;
+            app.Properties[property] = value;
+            await app.SavePropertiesAsync();
+        }
     }
 }

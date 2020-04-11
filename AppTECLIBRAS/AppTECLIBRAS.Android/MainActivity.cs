@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using System.Net;
 
 namespace AppTECLIBRAS.Droid
 {
@@ -16,6 +17,8 @@ namespace AppTECLIBRAS.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
+
+            ServicePointManager.ServerCertificateValidationCallback += (o, cert, chain, errors) => true;
 
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
