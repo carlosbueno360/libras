@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using TecLibras.UI.Web.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    
+<li class="nav-item">
+    <a class="nav-link text-light"  asp-area="" asp-controller="Points" asp-action="list-all"  title="Manage">Pontuação</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link text-light" asp-area="" asp-controller="Points" asp-action="rank"  title="Manage">Ranking</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
+</li>
+<li class="nav-item">
+    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+        <button type="submit" class="nav-link btn btn-link text-light">Logout</button>
+    </form>
+</li>
+}
+else
+{
+<li class="nav-item">
+    <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Cadastrar<span class="sr-only"></span></a>
+</li>
+
+<li>
+    <a class="btn btn-light" style="color:#ffa600; background-color: transparent; border-radius: 5px;" asp-area="Identity" asp-page="/Account/Login">Login</a>
+</li>
+}

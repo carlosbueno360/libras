@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppTECLIBRAS.Views.PageExercicios"
+             Title="Exercícios"   BackgroundColor="{StaticResource WhiteColor}">
+    <ContentPage.Content>
+        <StackLayout Orientation="Horizontal" Margin="20">
+            <StackLayout Margin="10">
+                <Label
+               Text="TecLibras"    
+               TextColor="{StaticResource AcentColor}"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="StartAndExpand"
+               VerticalOptions="Center">
+                </Label>
+               
+                <Label Text="FAÇA O SINAL DA VOGAL QUE COMPLETA CORRETAMENTE A ESCRITA DAS
+                      IMAGENS APRESENTADAS" 
+                       FontSize="Medium" 
+                       VerticalOptions="CenterAndExpand"
+                       FontAttributes="Bold" TextColor="Black"/>
+                <StackLayout Padding="10" Spacing="20">
+                    <Button x:Name="btlV1" Text="lEVEL 01" 
+                            HorizontalOptions="FillAndExpand"
+                             BackgroundColor="{StaticResource AcentColor}"
+                            TextColor="White"
+                            BorderColor="Red"/>
+                </StackLayout>
+                <StackLayout Padding="10" Spacing="20">
+                    <Button x:Name="btlV2" Text="lEVEL 02" 
+                            HorizontalOptions="FillAndExpand"
+                             BackgroundColor="{StaticResource AcentColor}"
+                            TextColor="White"
+                            BorderColor="Red"/>
+                </StackLayout>
+                <StackLayout Padding="10" Spacing="20">
+                    <Button x:Name="btlV3" Text="lEVEL 03" 
+                            HorizontalOptions="FillAndExpand"
+                             BackgroundColor="{StaticResource AcentColor}"
+                            TextColor="White"
+                            BorderColor="Red"/>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
