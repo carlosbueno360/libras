@@ -61,11 +61,13 @@ namespace AppTECLIBRAS.Views
 
             var token = await authClient.RegisterUser(userRegistration);
 
-            if (string.IsNullOrWhiteSpace(token))
+            if (token.Success)
                 return;
 
-            SetProperties("IsLoggedIn", true);
-   
+            SetProperties("IsLoggedIn", token.Success);
+            SetProperties("UserName", NomeEntry.Text);
+            SetProperties("UserId", token.UserId);
+            SetProperties("Email", token.Email);
             Device.BeginInvokeOnMainThread(async () =>
             {
                 var result = await this.DisplayAlert("Parabéns", "Usuário Registrado com Sucesso", "OK",".");

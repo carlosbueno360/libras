@@ -7,8 +7,8 @@ namespace AppTECLIBRAS.Clients
 {
     public interface IAuthClient
     {
-
-        Task<string> RegisterUser(UserRegistration userRegistration);
+        Task<LoggedinReponse> RegisterUser(UserRegistration userRegistration);
+        Task<LoggedinReponse> Login(UserLogin userLogin);
 
     }
 

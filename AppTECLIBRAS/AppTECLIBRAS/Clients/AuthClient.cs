@@ -20,20 +20,20 @@ namespace AppTECLIBRAS.Clients
 
 
 
-        public async Task<string> RegisterUser(UserRegistration userRegistration)
+        public async Task<LoggedinReponse> RegisterUser(UserRegistration userRegistration)
         {
             var request = new RestRequest($"/api/Account/register", DataFormat.Json);
             request.AddJsonBody(userRegistration);
-            var retorno = await _client.PostAsync<ResponseApi<string>>(request);
+            var retorno = await _client.PostAsync<ResponseApi<LoggedinReponse>>(request);
 
             return retorno.data;
         }
 
-        public async Task<string> Login(UserLogin userLogin)
+        public async Task<LoggedinReponse> Login(UserLogin userLogin)
         {
             var request = new RestRequest($"/api/Account/login", DataFormat.Json);
             request.AddJsonBody(userLogin);
-            var retorno = await _client.PostAsync<ResponseApi<string>>(request);
+            var retorno = await _client.PostAsync<ResponseApi<LoggedinReponse>>(request);
 
             return retorno.data;
         }

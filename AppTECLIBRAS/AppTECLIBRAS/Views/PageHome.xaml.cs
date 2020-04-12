@@ -1,20 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace AppTECLIBRAS.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class PageHome : ContentPage
-	{
-		public PageHome ()
-		{
-			InitializeComponent ();
-		}
-	}
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class PageHome : ContentPage
+    {
+        public PageHome()
+        {
+
+
+            InitializeComponent();
+            email.SetValue(Label.TextProperty, Convert.ToString(App.Current.Properties["Email"]));
+            userName.SetValue(Label.TextProperty, Convert.ToString(App.Current.Properties["UserName"]));
+        }
+    }
 }

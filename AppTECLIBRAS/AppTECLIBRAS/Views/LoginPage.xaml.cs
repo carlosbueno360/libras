@@ -41,24 +41,26 @@ namespace AppTECLIBRAS.Views
                 return;        /*FIM DA VERIFICAÇÃO DOS CAMPOS*/
             }
 
-            UserLogin userLogin = new UserLogin() { 
-                 Email = emailEntry.Text,
-                 Password = senhaEntry.Text
+            UserLogin userLogin = new UserLogin()
+            {
+                Email = emailEntry.Text,
+                Password = senhaEntry.Text
             };
             AuthClient authClient = new AuthClient();
 
             var token = await authClient.Login(userLogin);
-            var IsLoggedIn = true;
-            if (string.IsNullOrWhiteSpace(token))
-                IsLoggedIn = false;
+
+            var IsLoggedIn = token.Success;
 
             SetProperties("IsLoggedIn", IsLoggedIn);
-
+            SetProperties("UserId", token.UserId);
+            SetProperties("UserName", token.UserName);
+            SetProperties("Email", token.Email);
 
             if (IsLoggedIn)
             {
                 App.Current.MainPage = new NavigationPage(new PagePrincipal());
-                
+
             }
             else
             {
@@ -68,12 +70,12 @@ namespace AppTECLIBRAS.Views
                     if (result)
                     {
                         await Navigation.PushAsync(new LoginPage());
-                       
+
                     }
                     else
                     {
                         await Navigation.PushAsync(new LoginPage());
-                        
+
                     }
 
                 });

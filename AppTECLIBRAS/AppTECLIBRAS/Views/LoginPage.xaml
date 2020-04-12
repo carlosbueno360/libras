@@ -25,10 +25,9 @@
         </BoxView>
 
         <Entry x:Name="emailEntry"
-            Placeholder="E-mail"
+            Placeholder="UserName"
             TextColor="{StaticResource AcentColor}"
-            PlaceholderColor="Black"
-            Keyboard="Email">
+            PlaceholderColor="Black">
         </Entry>
 
         <Entry x:Name="senhaEntry"
